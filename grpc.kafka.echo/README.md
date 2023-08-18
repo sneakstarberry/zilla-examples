@@ -204,6 +204,28 @@ ghz --config bench.json \
     localhost:9090
 ```
 
+For create test stream message( you need python )
+```bash
+// in linux/mac
+$ python3 test.py
+message num:
+// input number of messages
+100
+
+// in window
+$ python test.py
+message num:
+// input number of messages
+100
+```
+use config file that use created messages by above python script
+```bash
+$ ghz --config config.json \
+    --proto proto/echo.proto \
+    --call example.EchoService/EchoBidiStream \
+    localhost:9090
+```
+
 ### Teardown
 
 The `teardown.sh` script stops port forwarding, uninstalls Zilla and deletes the namespace.

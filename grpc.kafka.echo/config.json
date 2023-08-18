@@ -1,0 +1,11 @@
+{
+    "skipTLS": true,
+    "stream-interval": "5ms",
+    "total": 50,
+    "concurrency": 50,
+    "data-file": "./messages.json",
+    "metadata": {
+        "trace_id": "{{.RequestNumber}}",
+        "timestamp": "{{.TimestampUnix}}"
+    }
+}
