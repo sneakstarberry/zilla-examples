@@ -247,3 +247,38 @@ release "zilla-grpc-kafka-echo-kafka" uninstalled
 + kubectl delete namespace zilla-grpc-echo
 namespace "zilla-grpc-kafka-echo" deleted
 ```
+
+### Error
+For reproduce Error follow this instruction
+
+```bash
+$ ghz --config config.json \
+    --proto proto/echo.proto \
+    --call example.EchoService/EchoBidiStream \
+    localhost:9090
+```
+if above command does not reproduce error then you can increase the message number by using python scripts mentioned above
+
+```bash
+$ python3 test.py
+message num:
+// input number of messages
+100
+```
+or you can just manipulate the config.json file by increase the number of `concurrency` and `total`
+total means number of connect.
+
+```bash
+config.json
+{
+    "skipTLS": true,
+    "stream-interval": "5ms",
+    "total": 50, // -> 100
+    "concurrency": 50, // -> 100
+    "data-file": "./messages.json",
+    "metadata": {
+        "trace_id": "{{.RequestNumber}}",
+        "timestamp": "{{.TimestampUnix}}"
+    }
+}
+```
